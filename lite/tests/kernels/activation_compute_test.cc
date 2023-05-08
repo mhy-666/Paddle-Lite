@@ -697,6 +697,13 @@ TEST(Activation_silu, precision) {
   abs_error = 2e-4;
 #elif defined(LITE_WITH_ARM)
   place = TARGET(kARM);
+#elif defined(LITE_WITH_NNADAPTER)
+  place = TARGET(kNNAdapter);
+#if defined(NNADAPTER_WITH_QUALCOMM_QNN)
+  abs_error = 1e-2;
+#else
+  return;
+#endif
 #else
   return;
 #endif
